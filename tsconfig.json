@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "module": "esnext",
+        "target": "es6",
+        "lib": ["DOM", "ES6"],
+        "jsx": "react",
+        "allowJs": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "noEmit": true,
+        "watch": true,
+    },
+    "include": ["./src"],
+    "exclude": ["./src/**/*.ignore.tsx", "./node_modules", "webpack.config.js"]
+}
