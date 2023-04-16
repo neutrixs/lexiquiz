@@ -4,7 +4,8 @@
   "description": "wordle, but unlimited.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "author": "neutrixs",
   "license": "GPL-3.0",
@@ -18,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/neutrixs/lexiquiz/issues"
   },
-  "homepage": "https://github.com/neutrixs/lexiquiz#readme"
+  "homepage": "https://github.com/neutrixs/lexiquiz#readme",
+  "dependencies": {
+    "husky": "^8.0.3"
+  },
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "pretty-quick": "^3.1.3"
+  }
 }
