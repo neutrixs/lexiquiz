@@ -15,31 +15,21 @@ $navbar-light: hsl(240, 14%, 80%);
 }
 
 .container {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    vertical-align: middle;
     width: 100%;
     max-width: 35em;
     margin: 0 1.5em;
-
-    div {
-        width: 100%;
-
-        &:first-child {
-            text-align: left;
-        }
-        &:nth-child(2) {
-            text-align: center;
-        }
-        &:nth-child(3) {
-            text-align: right;
-        }
-    }
+    position: relative;
 }
 
-.title {
-    font-family: 'Roboto', sans-serif;
-    font-size: 24pt;
-    letter-spacing: 2pt;
-    margin: 0;
+.titleHolder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 24pt;
+        letter-spacing: 2pt;
+        margin: 0;
+    }
 }

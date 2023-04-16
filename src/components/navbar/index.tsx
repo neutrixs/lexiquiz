@@ -5,11 +5,9 @@ export default function Navbar() {
     return (
         <nav className={style.navbar}>
             <div className={style.container}>
-                <div></div>
-                <div>
+                <div className={style.titleHolder}>
                     <p className={style.title}>LEXIQUIZ</p>
                 </div>
-                <div></div>
             </div>
         </nav>
     )
