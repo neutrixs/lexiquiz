@@ -11,6 +11,6 @@
         "noEmit": true,
         "watch": true,
     },
-    "include": ["./src"],
+    "include": ["./src", "index.d.ts"],
     "exclude": ["./src/**/*.ignore.tsx", "./node_modules", "webpack.config.js"]
 }

@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+$font-light: #202020;
+$font-dark: #dfdfdf;
+$background-dark: hsl(220, 14%, 15%);
+$background-light: #ffffff;
+$navbar-dark: #505050;
+$navbar-light: #e1e1e1;
+
+a,
+span,
+p {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.body {
+    margin: 0;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Inter', sans-serif;
+    color: $font-dark;
+    background-color: $background-dark;
+
+    &.light {
+        background-color: $background-light;
+        color: $font-light;
+    }
+}
