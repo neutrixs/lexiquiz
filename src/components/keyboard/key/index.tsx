@@ -23,7 +23,6 @@ export function Key({ special, children }: propsKey) {
         function keyupListener(e: KeyboardEvent) {
             if (children.toLowerCase() != e.key.toLowerCase()) return
             setActive(false)
-            console.log('holy fuck')
         }
 
         function clickListener() {
