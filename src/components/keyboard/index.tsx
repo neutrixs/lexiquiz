@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Key } from './key'
-import store from '../../store'
 import style from './style.module.scss'
 
 export default function Keyboard() {
-    const { guessedLetters } = useContext(store)
-
     return (
         <div className={style.keyboard}>
             <div className={style.columns + ' ' + style.c1}>
