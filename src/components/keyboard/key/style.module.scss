@@ -10,6 +10,12 @@
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
 
+    &:active,
+    &.active {
+        background-color: #606060;
+        transform: scale(0.95);
+    }
+
     img {
         width: 1.5em;
     }

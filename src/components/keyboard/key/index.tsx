@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import store from '../../../store'
 import style from './style.module.scss'
 import enter from '../../../icons/enter.svg'
@@ -11,20 +11,30 @@ interface propsKey {
 
 export function Key({ special, children }: propsKey) {
     const { KeyPressClass } = useContext(store)
+    const [active, setActive] = useState(false)
     const button = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         function keydownListener(e: KeyboardEvent) {
             if (children.toLowerCase() != e.key.toLowerCase()) return
             runTrigger()
+            setActive(true)
         }
+        function keyupListener(e: KeyboardEvent) {
+            if (children.toLowerCase() != e.key.toLowerCase()) return
+            setActive(false)
+            console.log('holy fuck')
+        }
+
         function clickListener() {
             runTrigger()
         }
         document.addEventListener('keydown', keydownListener)
+        document.addEventListener('keyup', keyupListener)
         button.current?.addEventListener('click', clickListener)
         return () => {
             document.removeEventListener('keydown', keydownListener)
+            document.removeEventListener('keyup', keyupListener)
             button.current?.removeEventListener('click', clickListener)
         }
     }, [])
@@ -46,7 +56,7 @@ export function Key({ special, children }: propsKey) {
     }
 
     return (
-        <div className={style.key} ref={button}>
+        <div className={style.key + ' ' + (active ? style.active : '')} ref={button}>
             {special ? specialKey() : normalKey}
         </div>
     )
