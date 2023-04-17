@@ -23,7 +23,8 @@
         grid-template-columns: repeat(10, minmax(0, 1fr));
     }
     &.c2 {
-        grid-template-columns: minmax(0, 0.5fr) repeat(9, minmax(0, 1fr)) minmax(0, 0.5fr);
+        grid-template-columns: repeat(9, minmax(0, 1fr));
+        width: 90%;
     }
     &.c3 {
         grid-template-columns: minmax(0, 1.5fr) repeat(7, minmax(0, 1fr)) minmax(0, 1.5fr);

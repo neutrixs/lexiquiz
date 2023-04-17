@@ -18,7 +18,6 @@ export default function Keyboard() {
                 <Key>P</Key>
             </div>
             <div className={style.columns + ' ' + style.c2}>
-                <div />
                 <Key>A</Key>
                 <Key>S</Key>
                 <Key>D</Key>
@@ -28,7 +27,6 @@ export default function Keyboard() {
                 <Key>J</Key>
                 <Key>K</Key>
                 <Key>L</Key>
-                <div />
             </div>
             <div className={style.columns + ' ' + style.c3}>
                 <Key special={true}>enter</Key>
