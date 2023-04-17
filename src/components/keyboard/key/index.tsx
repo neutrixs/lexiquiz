@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import store from '../../../store'
+import store, { guessedLettersHex as hex, guessedLettersValues } from '../../../store'
 import style from './style.module.scss'
 import enter from '../../../icons/enter.svg'
 import backspace from '../../../icons/backspace.svg'
@@ -10,9 +10,10 @@ interface propsKey {
 }
 
 export function Key({ special, children }: propsKey) {
-    const { KeyPressClass } = useContext(store)
+    const { KeyPressClass, guessedLetters } = useContext(store)
     const [active, setActive] = useState(false)
     const button = useRef<HTMLDivElement>(null)
+    const [bgColor, setBgColor] = useState(hex[guessedLettersValues.unknown])
 
     useEffect(() => {
         function keydownListener(e: KeyboardEvent) {
@@ -38,6 +39,10 @@ export function Key({ special, children }: propsKey) {
         }
     }, [])
 
+    useEffect(() => {
+        setBgColor(hex[guessedLetters[children.toLowerCase()] || guessedLettersValues.unknown])
+    }, [guessedLetters])
+
     function runTrigger() {
         KeyPressClass.trigger(children)
     }
@@ -55,7 +60,11 @@ export function Key({ special, children }: propsKey) {
     }
 
     return (
-        <div className={style.key + ' ' + (active ? style.active : '')} ref={button}>
+        <div
+            style={{ backgroundColor: bgColor }}
+            className={style.key + ' ' + (active ? style.active : '')}
+            ref={button}
+        >
             {special ? specialKey() : normalKey}
         </div>
     )
