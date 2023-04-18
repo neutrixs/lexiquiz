@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import store, { guessedLettersHex as hex, guessedLettersValues } from '../../../store'
+import { guessedLettersHex as hex, guessedLettersValues } from '../../game'
+import { context } from '../../game'
 import style from './style.module.scss'
 import enter from '../../../icons/enter.svg'
 import backspace from '../../../icons/backspace.svg'
@@ -10,7 +11,7 @@ interface propsKey {
 }
 
 export function Key({ special, children }: propsKey) {
-    const { KeyPressClass, guessedLetters } = useContext(store)
+    const { KeyPressClass, guessedLetters } = useContext(context)
     const [active, setActive] = useState(false)
     const button = useRef<HTMLDivElement>(null)
     const [bgColor, setBgColor] = useState(hex[guessedLettersValues.unknown])
