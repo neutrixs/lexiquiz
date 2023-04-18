@@ -103,9 +103,6 @@ const config = (dev, name) => ({
         proxy: {
             '*': 'http://localhost:' + process.env.PORT || 8080,
         },
-        devMiddleware: {
-            writeToDisk: true,
-        },
     },
     devtool: dev ? 'source-map' : false,
     performance: {
