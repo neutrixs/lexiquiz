@@ -16,12 +16,12 @@ const config = (dev, name) => ({
         path: path.resolve(__dirname, 'public'),
         clean: true,
     },
-    target: ['web', 'es6'],
+    target: ['web', 'es2020'],
     optimization: {
         minimize: !dev,
         minimizer: [
             new EsbuildPlugin({
-                target: 'es6',
+                target: 'es2020',
                 css: true,
             }),
         ],
@@ -42,7 +42,7 @@ const config = (dev, name) => ({
                 loader: 'esbuild-loader',
                 options: {
                     loader: 'tsx',
-                    target: 'es6',
+                    target: 'es2020',
                 },
             },
             {
@@ -50,7 +50,7 @@ const config = (dev, name) => ({
                 loader: 'esbuild-loader',
                 options: {
                     loader: 'ts',
-                    target: 'es6',
+                    target: 'es2020',
                 },
             },
             {
