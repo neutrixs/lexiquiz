@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useRef, useState } from 'react'
 import KeyPress from '../../class/keypress'
 import Keyboard from '../keyboard'
 import validate from './validate'
+import Display from '../display'
 
 export const WORD_LENGTH = 5
 export const MAX_TRIALS = 6
@@ -21,10 +22,14 @@ export const guessedLettersHex: { [key in guessedLettersValues]: string } = {
 }
 export type guessedLetter = { [key: string]: guessedLettersValues }
 const guessedLetterInit: guessedLetter = {}
+const trialsInit: string[] = []
 
 export const context = createContext({
     KeyPressClass: new KeyPress(),
     guessedLetters: guessedLetterInit,
+    trials: trialsInit,
+    currentWord: '',
+    index: 0,
 })
 
 function getGuessedLetters(
@@ -90,7 +95,7 @@ export default function Game() {
                     break
                 }
                 case 'enter': {
-                    if (indexRef.current + 1 >= MAX_TRIALS) {
+                    if (indexRef.current >= MAX_TRIALS) {
                         return
                     }
                     if (!trialsRef.current[indexRef.current]) {
@@ -146,7 +151,8 @@ export default function Game() {
     }
 
     return (
-        <context.Provider value={{ KeyPressClass, guessedLetters }}>
+        <context.Provider value={{ KeyPressClass, guessedLetters, trials, index, currentWord }}>
+            <Display {...{ currentWord, trials, trialsIndex: index }} />
             <Keyboard />
         </context.Provider>
     )
