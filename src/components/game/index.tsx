@@ -6,7 +6,7 @@ import Display from '../display'
 
 export const WORD_LENGTH = 5
 export const MAX_TRIALS = 6
-export const CLEAR_AFTER_SHAKE_DELAY_MS = 1000
+export const CLEAR_AFTER_SHAKE_DELAY_MS = 375
 
 export enum guessedLettersValues {
     unknown,
@@ -66,6 +66,7 @@ export default function Game() {
     const [currentWord, setCurrentWord] = useState('')
     const [trials, setTrials] = useState<string[]>([])
     const [index, setIndex] = useState(0)
+    const [shake, setShake] = useState(false)
     const guessedLetters = getGuessedLetters(trials, currentWord, index)
 
     const trialsRef = useRef(trials)
@@ -105,6 +106,7 @@ export default function Game() {
                         return
                     }
                     if (!(await validate(trialsRef.current[indexRef.current]))) {
+                        setShake(true)
                         setTimeout(() => {
                             setTrials((prevTrials) => {
                                 const trials = [...prevTrials]
@@ -112,6 +114,7 @@ export default function Game() {
 
                                 return trials
                             })
+                            setShake(false)
                         }, CLEAR_AFTER_SHAKE_DELAY_MS)
                         return
                     }
@@ -152,7 +155,7 @@ export default function Game() {
 
     return (
         <context.Provider value={{ KeyPressClass, guessedLetters, trials, index, currentWord }}>
-            <Display {...{ currentWord, trials, trialsIndex: index }} />
+            <Display {...{ currentWord, trials, trialsIndex: index, shake }} />
             <Keyboard />
         </context.Provider>
     )

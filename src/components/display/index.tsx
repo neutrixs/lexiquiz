@@ -6,6 +6,7 @@ export interface props {
     trials: string[]
     trialsIndex: number
     currentWord: string
+    shake: boolean
 }
 
 export default function Display(props: props) {
