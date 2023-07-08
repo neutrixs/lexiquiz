@@ -8,8 +8,7 @@
         "allowJs": true,
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
-        "noEmit": true,
-        "watch": true,
+        "noEmit": true
     },
     "include": ["./src", "index.d.ts"],
     "exclude": ["./src/**/*.ignore.tsx", "./node_modules", "webpack.config.js"]
