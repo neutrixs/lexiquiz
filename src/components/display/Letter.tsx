@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
-import { context, guessedLettersHex, guessedLettersValues } from '../game'
+import React, { useEffect, useState } from 'react'
+import { guessedLettersHex, guessedLettersValues, LETTER_ANIMATION_LENGTH_MS } from '../game'
 import { findAllIndex } from '../../scripts/arrays'
-import style from './style.module.scss'
 import { props } from '.'
+import style from './style.module.scss'
 interface additionalProps extends props {
     position: number
     index: number
+    animationPos: number
 }
 
 export default function Letter({
@@ -14,8 +15,28 @@ export default function Letter({
     trials,
     index,
     trialsIndex,
+    animationPos,
 }: additionalProps) {
     const letter = trials[index]?.[position] ?? ''
+    const animationStyle: React.CSSProperties = {
+        animation: `${style.letterPop}`,
+        animationDuration: `${LETTER_ANIMATION_LENGTH_MS}ms`,
+    }
+
+    const [applyAnimation, setApplyAnimation] = useState(false)
+    const [applyColor, setApplyColor] = useState(false)
+
+    useEffect(() => {
+        if (animationPos != position) {
+            return
+        }
+
+        setApplyAnimation(true)
+        setApplyColor(true)
+        setTimeout(() => {
+            setApplyAnimation(false)
+        }, LETTER_ANIMATION_LENGTH_MS)
+    }, [animationPos])
 
     function getColor() {
         if (trialsIndex <= index) {
@@ -56,7 +77,15 @@ export default function Letter({
     }
 
     return (
-        <div className={style.letterContainer} style={{ backgroundColor: getColor() }}>
+        <div
+            className={style.letterContainer}
+            style={{
+                transitionProperty: 'background-color',
+                transitionDuration: `${LETTER_ANIMATION_LENGTH_MS / 2}ms`,
+                backgroundColor: applyColor ? getColor() : '#00000000',
+                ...(applyAnimation ? animationStyle : {}),
+            }}
+        >
             <span>{letter.toUpperCase()}</span>
         </div>
     )

@@ -1,11 +1,21 @@
 export default class KeyPress {
     #functions: Array<(key: string) => any>
+    #blocked: boolean
 
     public constructor() {
         this.#functions = []
+        this.#blocked = false
         this.addListener = this.addListener.bind(this)
         this.removeListener = this.removeListener.bind(this)
         this.trigger = this.trigger.bind(this)
+    }
+
+    public blockInput() {
+        this.#blocked = true
+    }
+
+    public unblockInput() {
+        this.#blocked = false
     }
 
     public addListener(cb: (key: string) => any) {
@@ -18,6 +28,9 @@ export default class KeyPress {
     }
 
     public trigger(key: string) {
+        if (this.#blocked) {
+            return
+        }
         this.#functions.forEach((fn) => fn(key))
     }
 }

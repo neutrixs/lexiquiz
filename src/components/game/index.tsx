@@ -7,6 +7,7 @@ import Display from '../display'
 export const WORD_LENGTH = 5
 export const MAX_TRIALS = 6
 export const CLEAR_AFTER_SHAKE_DELAY_MS = 375
+export const LETTER_ANIMATION_LENGTH_MS = 500
 
 export enum guessedLettersValues {
     unknown,
