@@ -3,6 +3,7 @@ import KeyPress from '../../class/keypress'
 import Keyboard from '../keyboard'
 import validate from './validate'
 import Display from '../display'
+import * as api from '../../api'
 
 export const WORD_LENGTH = 5
 export const MAX_TRIALS = 6
@@ -146,12 +147,12 @@ export default function Game() {
     }, [])
 
     async function getWord() {
-        const request = await fetch('/api/getword')
-        if (!request.ok) {
+        try {
+            const word = await api.getWord()
+            setCurrentWord(word)
+        } catch (_) {
             setTimeout(() => getWord(), 2000)
-            return
         }
-        setCurrentWord(await request.text())
     }
 
     return (

@@ -1,15 +1,12 @@
-import * as api from '../types/api/checkword'
+import * as api from '../../api'
+import sleep from '../../scripts/sleep'
 
 export default async function validate(word: string): Promise<boolean> {
-    const reqBody: api.request = { word }
-    const request = await fetch('/api/checkword', {
-        method: api.method,
-        headers: {
-            'Content-Type': api.contentType,
-        },
-        body: JSON.stringify(reqBody),
-    })
-
-    const response = (await request.json()) as api.response
-    return response.found
+    try {
+        const data = await api.checkWord(word)
+        return data.found
+    } catch (e) {
+        await sleep(1000)
+        return await validate(word)
+    }
 }
