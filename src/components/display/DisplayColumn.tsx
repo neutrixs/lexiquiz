@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState, useRef } from 'react'
 import { context, LETTER_ANIMATION_LENGTH_MS, WORD_LENGTH } from '../game'
 import sleep from '../../scripts/sleep'
 import style from './style.module.scss'
@@ -13,6 +13,7 @@ export default function DisplayColumn(props: additionalProps) {
     const ctx = useContext(context)
     const { KeyPressClass } = ctx
     const [animationPos, setAnimationPos] = useState(-1)
+    const blockInputRequest = useRef(KeyPressClass.createBlockInputRequest())
 
     useEffect(() => {
         if (props.trialsIndex != props.index + 1) {
@@ -20,13 +21,13 @@ export default function DisplayColumn(props: additionalProps) {
         }
 
         ;(async () => {
-            KeyPressClass.blockInput()
+            blockInputRequest.current.block()
             for (let i = 0; i < WORD_LENGTH; i++) {
                 setAnimationPos(i)
                 await sleep(LETTER_ANIMATION_LENGTH_MS)
             }
             setAnimationPos(-1)
-            KeyPressClass.unblockInput()
+            blockInputRequest.current.unblock()
         })()
     }, [props.trialsIndex])
 

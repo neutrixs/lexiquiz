@@ -69,12 +69,33 @@ export default function Game() {
     const [trials, setTrials] = useState<string[]>([])
     const [index, setIndex] = useState(0)
     const [shake, setShake] = useState(false)
+    const [gameFinished, setGameFinished] = useState(false)
     const guessedLetters = getGuessedLetters(trials, currentWord, index)
 
+    const blockInputRequest = useRef(KeyPressClass.createBlockInputRequest())
     const trialsRef = useRef(trials)
     const indexRef = useRef(index)
     trialsRef.current = trials
     indexRef.current = index
+
+    useEffect(() => {
+        // this means that the user has just 'entered' their input (the index is incremented),
+        // but they haven't inputted anything for the next trial (trials.length remains the same)
+        if (index != trials.length) {
+            return
+        }
+        if (trials.at(-1) != currentWord) {
+            return
+        }
+
+        setGameFinished(true)
+    }, [trials, index, currentWord])
+
+    useEffect(() => {
+        if (gameFinished) {
+            blockInputRequest.current.block()
+        }
+    }, [gameFinished])
 
     useEffect(() => {
         getWord()

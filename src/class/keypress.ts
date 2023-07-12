@@ -1,21 +1,23 @@
 export default class KeyPress {
     #functions: Array<(key: string) => any>
-    #blocked: boolean
+    #blockInputRequests: Array<BlockInputRequest>
+
+    #isBlocked() {
+        return this.#blockInputRequests.some((req) => req.blocked)
+    }
 
     public constructor() {
         this.#functions = []
-        this.#blocked = false
+        this.#blockInputRequests = []
         this.addListener = this.addListener.bind(this)
         this.removeListener = this.removeListener.bind(this)
         this.trigger = this.trigger.bind(this)
     }
 
-    public blockInput() {
-        this.#blocked = true
-    }
-
-    public unblockInput() {
-        this.#blocked = false
+    public createBlockInputRequest() {
+        const req = new BlockInputRequest()
+        this.#blockInputRequests.push(req)
+        return req
     }
 
     public addListener(cb: (key: string) => any) {
@@ -28,9 +30,27 @@ export default class KeyPress {
     }
 
     public trigger(key: string) {
-        if (this.#blocked) {
+        if (this.#isBlocked()) {
             return
         }
         this.#functions.forEach((fn) => fn(key))
+    }
+}
+
+export class BlockInputRequest {
+    public blocked: boolean
+
+    public constructor() {
+        this.blocked = false
+    }
+
+    public block() {
+        this.blocked = true
+        return this
+    }
+
+    public unblock() {
+        this.blocked = false
+        return this
     }
 }
