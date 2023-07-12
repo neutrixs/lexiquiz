@@ -128,6 +128,8 @@ export default function Game() {
                     if (trialsRef.current[indexRef.current].length != WORD_LENGTH) {
                         return
                     }
+
+                    const tempBlock = KeyPressClass.createBlockInputRequest().block()
                     if (!(await validate(trialsRef.current[indexRef.current]))) {
                         setShake(true)
                         setTimeout(() => {
@@ -138,10 +140,12 @@ export default function Game() {
                                 return trials
                             })
                             setShake(false)
+                            tempBlock.unblock()
                         }, CLEAR_AFTER_SHAKE_DELAY_MS)
                         return
                     }
                     setIndex((index) => index + 1)
+                    tempBlock.unblock()
                     break
                 }
                 default: {
