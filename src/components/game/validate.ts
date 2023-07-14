@@ -3,7 +3,7 @@ import sleep from '../../scripts/sleep'
 
 export default async function validate(word: string): Promise<boolean> {
     try {
-        const data = await api.checkWord(word)
+        const data = await api.words.checkWord(word)
         return data.found
     } catch (e) {
         await sleep(1000)

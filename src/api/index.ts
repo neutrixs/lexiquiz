@@ -1,2 +1,3 @@
-export { getWord } from './endpoints/getWord'
-export { checkWord } from './endpoints/checkWord'
+import * as words from './endpoints/words'
+
+export { words }

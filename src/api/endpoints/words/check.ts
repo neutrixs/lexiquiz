@@ -11,7 +11,7 @@ export async function checkWord(word: string): Promise<responseType> {
         const body: requestType = {
             word,
         }
-        const request = await fetch('/api/checkword', {
+        const request = await fetch('/api/words/check', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

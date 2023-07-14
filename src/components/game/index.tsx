@@ -173,7 +173,7 @@ export default function Game() {
 
     async function getWord() {
         try {
-            const word = await api.getWord()
+            const word = await api.words.getWord()
             setCurrentWord(word)
         } catch (_) {
             setTimeout(() => getWord(), 2000)
