@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Game from '../game'
 import Navbar from '../navbar'
 import style from './style.module.scss'
@@ -10,8 +11,12 @@ export default function MainComponent() {
 
     return (
         <React.StrictMode>
-            <Navbar />
-            <Game />
+            <BrowserRouter>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Game />} />
+                </Routes>
+            </BrowserRouter>
         </React.StrictMode>
     )
 }

@@ -2,8 +2,8 @@ $navbar-dark: hsl(240, 14%, 25%);
 $navbar-light: hsl(240, 14%, 80%);
 
 .navbar {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -14,22 +14,44 @@ $navbar-light: hsl(240, 14%, 80%);
     background-color: $navbar-dark;
 }
 
-.container {
-    width: 100%;
-    max-width: 35em;
-    margin: 0 1.5em;
-    position: relative;
+.titleHolderH {
+    display: flex;
+    justify-content: center;
 }
 
 .titleHolder {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
     p {
         font-family: 'Roboto', sans-serif;
         font-size: 24pt;
         letter-spacing: 2pt;
         margin: 0;
+    }
+}
+
+.loginHolderH {
+    display: flex;
+    justify-content: right;
+}
+
+.loginHolder {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    align-items: center;
+    margin-right: 1.5em;
+    cursor: pointer;
+
+    img {
+        width: 2em;
+    }
+
+    p {
+        font-family: 'Roboto', sans-serif;
+        letter-spacing: 1pt;
     }
 }
