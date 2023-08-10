@@ -101,7 +101,7 @@ const config = (dev, name) => ({
         historyApiFallback: true,
         //@ts-ignore
         proxy: {
-            '*': 'http://localhost:' + (process.env.PORT || 8080),
+            '/api/*': 'http://localhost:' + (process.env.PORT || 8080),
         },
     },
     devtool: dev ? 'source-map' : false,
